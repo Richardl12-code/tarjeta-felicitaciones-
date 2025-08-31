@@ -1,60 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>🎉 Happy Birthday! 🎂</title>
+    <title>🎇 ¡Feliz Cumpleaños! 🎂</title>
     <style>
         body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #fff5f5;
-            color: #d23369;
-            padding: 50px;
+            
         }
         .card {
-            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             padding: 30px;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            z-index: 100;
         }
         h1 {
-            font-size: 2.5em;
+            color: #d23369;
+            font-size: 2.2em;
+            margin-bottom: 10px;
         }
         p {
-            font-size: 1.2em;
+            color: #333;
+            font-size: 1.1em;
         }
-        .confetti {
+        .cake {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f0f;
-            animation: fall 5s linear infinite;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            z-index: 50;
         }
-        @keyframes fall {
-            to { transform: translateY(100vh); }
+        /* Estilos para los juegos artificiales */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px;
+            animation: explode 2s ease-out infinite;
+            opacity: 0;
+        }
+        @keyframes explode {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)); opacity: 0; }
         }
     </style>
 </head>
 <body>
+    <!-- Pastel animado -->
+    <img class="cake" src="https://emojicdn.elk.sh/🎂" alt="Pastel" id="cake">
+
+    <!-- Tarjeta de felicitación -->
     <div class="card">
-        <h1>🎂 Happy Birthday! 🎉</h1>
-        <p>Wishing you a day filled with joy, laughter, and lots of cake!</p>
-        <p>You are amazing, and today is all about YOU. 💖</p>
-        <p>Enjoy your special day!</p>
+        <h1>🎇 Happy Birthday Purita ! 🎉</h1>
+        <p>Te deseo un dia lleno de alegria y risas !</p>
+        <p>Es tu dia y se trata de ti ! 😁</p>
     </div>
 
-    <!-- Efecto de confeti (opcional) -->
+    <!-- Juegos artificiales con JavaScript -->
     <script>
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
+        // Animación del pastel
+        const cake = document.getElementById('cake');
+        let scale = 1;
+        setInterval(() => {
+            scale = scale === 1 ? 1.1 : 1;
+            cake.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }, 500);
+
+        // Crear fuegos artificiales
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            
+            // Posición inicial (abajo de la pantalla)
+            const x = Math.random() * window.innerWidth;
+            firework.style.left = `${x}px`;
+            firework.style.bottom = '0px';
+            
+            // Color aleatorio
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Animación de explosión
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 100 + Math.random() * 200;
+            firework.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+            firework.style.setProperty('--ty', `${Math.sin(angle) * distance - 100}px`);
+            
+            document.body.appendChild(firework);
+            
+            // Eliminar después de la animación
+            setTimeout(() => firework.remove(), 2000);
         }
-        setInterval(createConfetti, 150);
+
+        // Disparar fuegos artificiales cada 300ms
+        setInterval(createFirework, 300);
     </script>
 </body>
 </html>
+
