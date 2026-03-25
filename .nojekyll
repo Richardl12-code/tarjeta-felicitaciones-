@@ -1,1 +1,4 @@
 
+git add .nojekyll index.html
+git commit -m "Agregar .nojekyll para desactivar Jekyll"
+git push
